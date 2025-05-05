@@ -1,23 +1,541 @@
-<section class="overview-section">
-    <h2>Same Coffee, Different Streets</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Same Coffee, Different Streets - Third Wave Coffee Aesthetics</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: #333;
+      border-bottom: 2px solid #f5f5f5;
+      padding-bottom: 0.5rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    h4 {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+    
+    strong {
+      color: #333;
+      font-weight: 600;
+    }
+    
+    blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid #ff9e54;
+      background-color: #fafafa;
+      font-style: italic;
+    }
+    
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 4rem 2rem 3rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    header h1 {
+      margin-bottom: 1rem;
+    }
+    
+    header p {
+      max-width: 800px;
+      font-size: 1.2rem;
+      margin-left: 0;
+    }
+    
+    .overview-section {
+      background-color: #fff;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .overview-content {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    
+    .emphasis {
+      font-style: italic;
+      color: #ff9e54;
+      font-weight: 500;
+    }
+    
+    /* Maps and Visuals */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      justify-items: center;
+      background-color: #fafafa;
+      max-width: 1400px;
+      margin: 3rem auto;
+    }
+    
+    .map-grid figure {
+      margin: 0;
+      text-align: center;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0;
+      transition: transform 0.2s ease;
+    }
+    
+    .map-grid figure:hover {
+      transform: translateY(-5px);
+    }
+    
+    .map-grid img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .map-grid figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.4;
+      text-align: left;
+    }
+    
+    .full-map {
+      width: 90%;
+      max-width: 1200px;
+      height: 60vh;
+      position: relative;
+      overflow: hidden;
+      margin: 3rem auto;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+    }
+    
+    .full-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+      padding: 1.5rem;
+      box-sizing: border-box;
+    }
+    
+    .svg-container {
+      width: 90%;
+      height: 70vh;
+      max-width: 1200px;
+      margin: 3rem auto;
+      overflow: hidden;
+      position: relative;
+      background-color: white;
+    }
+    
+    .svg-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      overflow: hidden;
+    }
+    
+    .loading-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255,255,255,0.9);
+      padding: 1rem 2rem;
+      border-radius: 0;
+      font-size: 1rem;
+      color: #333;
+    }
+    
+    /* City Grid */
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      width: 95%;
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    
+    .city-container {
+      position: relative;
+      background-color: white;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      height: 550px;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .city-info {
+      margin-bottom: 1.5rem;
+    }
+    
+    .city-name {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .city-description {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    
+    .color-palette {
+      display: flex;
+      height: 30px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+    
+    .color-swatch {
+      flex: 1;
+    }
+    
+    .city-container .svg-container {
+      width: 100%;
+      height: 350px;
+      margin: 0;
+    }
+    
+    /* Comparison Sections */
+    .color-comparison,
+    .text-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto;
+    }
+    
+    .color-profile,
+    .text-profile {
+      background: white;
+      padding: 2rem;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .color-profile-title,
+    .text-profile-title {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      color: #333;
+      text-align: left;
+    }
+    
+    .color-profile img,
+    .text-profile img {
+      width: 100%;
+      height: auto;
+    }
+    
+    /* Map Comparisons */
+    .map-pair {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
+      width: 100%;
+    }
+    
+    .map-container {
+      width: 45%;
+      background: white;
+      padding: 1.5rem;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .map-container img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .map-container figcaption {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.4;
+      text-align: left;
+    }
+    
+    /* Final Sections */
+    .final-view {
+      padding: 5rem 2rem;
+      background-color: white;
+      margin: 4rem 0;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .final-view h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      border-bottom: none;
+      text-align: left;
+    }
+    
+    .final-view p {
+      max-width: 800px;
+      margin: 0 0 2rem;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      text-align: left;
+    }
+    
+    /* Methodology Section */
+    .methodology {
+      max-width: 800px;
+      margin: 3rem auto;
+      background-color: white;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .methodology-header {
+      background-color: #ff9e54;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .methodology-header h3 {
+      margin: 0;
+      color: white;
+    }
+    
+    .methodology-content {
+      padding: 2rem;
+      display: none;
+    }
+    
+    .methodology-content.active {
+      display: block;
+    }
+    
+    .methodology-content p {
+      text-align: left;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: left;
+      padding: 3rem 2rem;
+      color: #666;
+      font-size: 0.95rem;
+      background-color: #fafafa;
+      margin-top: 5rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    footer a {
+      color: #ff9e54;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+      .map-pair {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+      }
+      .map-container {
+        max-width: 100vw;
+        width: 100%;
+        padding: 1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .map-pair {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .map-container {
+        width: 90%;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* List Styling */
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    /* Button for methodology toggle */
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    /* Accent Colors from Image */
+    .accent-orange {
+      color: #ff9e54;
+    }
+    
+    .accent-pink {
+      color: #f5a9e1;
+    }
+    
+    .accent-yellow {
+      color: #ffbd59;
+    }
+    
+    .accent-lavender {
+      color: #e0c1f0;
+    }
+    
+    /* Scroll Indicator */
+    .scroll-indicator {
+      margin-top: 2rem;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+    
+    .scroll-indicator svg {
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+
+    .text-comparison {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>Brewed, Branded, and Beige</h1>
+      <p>Thousands of third-wave cafés across 91 cities reveal a surprisingly uniform color code for cool. Beige.</p>
+    </div>
+    <p> By <a href="https://chilinhhovo.github.io/"> Chi Vo</a></p>
+  </header>
+
+  <section class="overview-section">
     <div class="overview-content">
-        <p>
-            Coffee has always mirrored the times. In the <strong>first wave</strong>, it was a commodity — mass-produced, canned, brewed fast. Think Folgers or instant Nescafé. The <strong>second wave</strong> turned it into experience: espresso, baristas, the rise of Starbucks. Then came the <strong>third wave</strong> — a global movement that treats coffee like wine: artisanal, traceable, and deeply aesthetic. 
-          </p>
-          <p>
-            Third-wave coffee shops emphasize <em>origin, process, and craft</em>. They celebrate pour-overs, local roasters, and hand-thrown ceramic cups. And they do so in carefully designed spaces that often reflect values like minimalism, sustainability, and community.
-          </p>
+      <p>
+        Coffee prices surged in 2024 and 2025 as droughts in Brazil and Vietnam pushed beans to their highest levels in over a decade. But even as costs rise, the global appetite for carefully made, beautifully presented coffee keeps growing. From Tokyo to Tulum, third-wave cafés are shaping not just how we drink, but how we design, brand, and live
+      </p>
+      <h2>The Evolution of Coffee Culture</h2>
+      <p>
+        The first wave was about convenience: mass-produced tins of Folgers, scoops of instant Nescafé, quick brewing with little ceremony. The second wave brought the café experience into focus, fueled by the rise of espresso drinks, branded baristas, and the global spread of Starbucks.
+      </p>
+      <p>
+        The third wave reimagines coffee as craft. This global movement emphasizes origin, process, and aesthetic. Cafés highlight single-origin beans, pour-over rituals, and hand-thrown ceramics. Design is central. Interiors often feature raw wood, soft light, and minimal ornamentation, projecting values like care, sustainability, and intentional living.
+      </p>
       
       <p>
-        Third-wave coffee is not just a trend. It is a global language. From the concrete calm of Copenhagen to the tropical textures of Chiang Mai, cafés around the world express a common style through wood, ceramic, pour-over rituals, and minimalist interiors. This movement is less about caffeine, and more about values: care, craft, and quiet connection.
+        From Copenhagen to Chiang Mai, a shared visual language has emerged. Despite cultural differences, third-wave cafés around the world speak in the same tones: beige walls, terrazzo counters, curated playlists, and artisanal details. These choices are not just about taste. They signal a worldview shaped by slowness, transparency, and quiet aspiration.
       </p>
+
+      <p>This movement is less about caffeine, and more about values: care, craft, and quiet connection.</p>
   
       <p>
-        This visual story traces how third-wave coffee culture has spread across the globe. We mapped over <strong>5,000 coffee shops</strong> in 43 cities, analyzed their Instagram aesthetics, and compared the color palettes and design language that define this cultural movement.
-      </p>
-  
-      <p>
-        These visuals come at a pivotal moment. Coffee prices surged in 2024 and 2025 due to climate-driven droughts in Brazil and Vietnam, pushing beans to their highest levels in over a decade. Even amid rising costs, the demand for meaningful, high-quality coffee has grown. Coffee has become more than a beverage. It is a daily ritual, a style, and a statement.
+        This visual story traces how third-wave coffee culture has spread across the globe. I mapped over <strong>5,000 coffee shops</strong> in 91 cities, analyzed their Instagram aesthetics, and compared the color palettes and design language that define this cultural movement.
       </p>
   
       <p>
@@ -26,16 +544,18 @@
     </div>
   </section>
   
-<section id="coffee-geography">
+  <section id="coffee-geography" class="container">
     <h2>The Geography of Third-Wave Coffee</h2>
     <p>
       These maps show cities with the highest concentration of third-wave cafés — all with over 40 documented shops.
-      By placing each coffee dot against local landmarks and street layouts, we can see how coffee culture clusters:
+      By placing each coffee dot against local landmarks and street layouts, I can see how coffee culture clusters:
       often in creative districts, gentrifying zones, or transit corridors.
     </p>
-    <div class="full-map"></div>
-        <img src="global_thirdwave_map.svg" alt="World map">
+    
+    <div class="full-map">
+      <img src="global_thirdwave_map.png" alt="World map of third-wave coffee shops">
     </div>
+    
     <div class="map-grid"> 
       <figure>
         <img src="output_svgs/map_amsterdam.svg" alt="Amsterdam coffee map">
@@ -66,81 +586,6 @@
         <img src="output_svgs/map_chiang_rai.svg" alt="Chiang Rai coffee map">
         <figcaption>Chiang Rai: Small but dense — with a surprising number of roasters near the night market.</figcaption>
       </figure>
-  
-      <figure>
-        <img src="output_svgs/map_copenhagen.svg" alt="Copenhagen coffee map">
-        <figcaption>Copenhagen: A clean Scandinavian layout, mirrored by the coffee shop aesthetic.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_dallas.svg" alt="Dallas coffee map">
-        <figcaption>Dallas: Coffee finds a home in Bishop Arts, Deep Ellum, and the edges of downtown.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_denver.svg" alt="Denver coffee map">
-        <figcaption>Denver: Third-wave cafés line up along Colfax, RiNo, and the South Broadway strip.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_fukuoka.svg" alt="Fukuoka coffee map">
-        <figcaption>Fukuoka: A quiet hub of Japanese coffee excellence tucked into Tenjin and Hakata.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_ho_chi_minh_city.svg" alt="Ho Chi Minh City coffee map">
-        <figcaption>Ho Chi Minh City: A wild café boom stretches across Districts 1, 3, and Phu Nhuan.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_istanbul.svg" alt="Istanbul coffee map">
-        <figcaption>Istanbul: Espresso meets East and West across Beyoğlu, Kadıköy, and Moda.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_kyiv.svg" alt="Kyiv coffee map">
-        <figcaption>Kyiv: Third-wave resilience shows in Podil and across the capital's creative circles.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_montreal.svg" alt="Montreal coffee map">
-        <figcaption>Montréal: Café culture brews strong along the Plateau and Mile End.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_moscow.svg" alt="Moscow coffee map">
-        <figcaption>Moscow: Despite recent slowdowns, the café web still pulses from the Garden Ring outward.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_phuket.svg" alt="Phuket coffee map">
-        <figcaption>Phuket: Cafés cluster in coastal zones and digital nomad enclaves around Rawai.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_portland.svg" alt="Portland coffee map">
-        <figcaption>Portland: One of third wave's birthplaces — coffee dots spill across every quadrant.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_san_diego.svg" alt="San Diego coffee map">
-        <figcaption>San Diego: Roasters pop up from North Park to La Jolla, close to surf and sun.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_seattle.svg" alt="Seattle coffee map">
-        <figcaption>Seattle: Still a coffee capital, with dots radiating from Capitol Hill and Fremont.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_singapore.svg" alt="Singapore coffee map">
-        <figcaption>Singapore: Hidden cafés bloom in Chinatown shophouses and along Tanjong Pagar.</figcaption>
-      </figure>
-  
-      <figure>
-        <img src="output_svgs/map_warsaw_large.svg" alt="Warsaw coffee map">
-        <figcaption>Warsaw: An Eastern European leader in third wave — with cafes blanketing Śródmieście and Praga.</figcaption>
-      </figure>
     </div>
 
     <div class="geography-section">
@@ -148,74 +593,234 @@
         The geography of third-wave cafés tells us as much about a city's social fabric as it does about coffee itself. In European cities like <strong>Berlin</strong>, <strong>Warsaw</strong>, and <strong>Amsterdam</strong>, coffee shops tend to be more evenly spread — mirroring the density and walkability of older urban cores. In contrast, cities like <strong>Bangkok</strong>, <strong>Phuket</strong>, and <strong>Bali</strong> show cafés clustered tightly around tourist zones, creative enclaves, or beach-adjacent nomad hubs. In North America, patterns skew toward affluence: in <strong>Dallas</strong>, <strong>Denver</strong>, and <strong>San Diego</strong>, third-wave cafés often align with gentrified neighborhoods or near tech and creative industry zones. What emerges is a global map of taste — not just for coffee, but for lifestyle.
       </p>
     </div>
+  </section>
 
-    <div class="overview-section">
-      <h2>Instagram's Palette vs. the Website's</h2>
-      <div class="overview-content">
-        <p>
-          While Instagram captures the lived, lit, and latte-topped moments inside cafés, coffee shop websites tell a slightly different story. We compared each city's most common Instagram tones with their website palettes — and noticed something striking.
-        </p>
+  <section class="overview-section">
+    <div class="overview-content">
+      <h2>The Global Coffee Palette</h2>
+      <p>Most third-wave coffee shops follow a shared aesthetic built on neutral tones. Across cities, beige, brown, and gray dominate the visual language, reflecting a minimalist and curated style that has become nearly universal.</p>
+      
+      <p>But scattered among these muted palettes are moments of contrast. Blues, reds, yellows, and the occasional purple cut through the calm with hints of local character. These colors are not just decorative. They introduce variation within the global template, offering clues about regional identity and personal expression.</p>
+      
+      <p>Rather than break the pattern, these accents add structure. They bring visual rhythm to the grid and suggest that even within a global style, there is space for individuality and surprise.</p>
+      
+      <div class="svg-container">
+        <iframe src="output_color_squares/all_cities_combined.svg" title="All cities combined color grid" id="allCitiesFrame"></iframe>
+        <div class="loading-message">Loading combined visualization...</div>
+      </div>
+      
+      
+      <p>This visualization shows how third-wave coffee culture has created a consistent global style while still leaving room for local identity and individual expression. It reveals a balance between uniformity and variation, where each city’s café scene feels both familiar and distinctly its own.</p>
+    </div>
 
-        <div class="color-comparison">
-          <div class="color-profile">
-            <h3 class="color-profile-title">Average Instagram <br>Color Profile per City</h3>
-            <img src="city_color_profiles.svg" alt="Most common Instagram color per city (KMeans)">
+    <div class="city-grid">
+      <div class="city-container">
+        <div class="city-info">
+          <h3 class="city-name">Barcelona</h3>
+          <p class="city-description">Mediterranean warmth blends with modernist elements</p>
+          <div class="color-palette">
+            <div class="color-swatch" style="background-color: #3d332d;"></div>
+            <div class="color-swatch" style="background-color: #cfc8c2;"></div>
+            <div class="color-swatch" style="background-color: #a3907f;"></div>
+            <div class="color-swatch" style="background-color: #b2abb3;"></div>
+            <div class="color-swatch" style="background-color: #506e8f;"></div>
           </div>
-          <div class="color-profile">
-            <h3 class="color-profile-title">Average Wesbite <br> Color Profile per City</h3>
-            <img src="clustered_city_colors.svg" alt="Mean Instagram color per city">
+        </div>
+        
+        <div class="svg-container">
+          <iframe src="output_color_squares/color_grid_Barcelona.svg" title="Barcelona coffee color grid"></iframe>
+          <div class="loading-message">Loading Barcelona visualization...</div>
+        </div>
+      </div>
+    
+      <div class="city-container">
+        <div class="city-info">
+          <h3 class="city-name">Bangkok</h3>
+          <p class="city-description">Tropical woods with bright accent colors</p>
+          <div class="color-palette">
+            <div class="color-swatch" style="background-color: #ded7ce;"></div>
+            <div class="color-swatch" style="background-color: #4d443e;"></div>
+            <div class="color-swatch" style="background-color: #c5b7a1;"></div>
+            <div class="color-swatch" style="background-color: #a85b3b;"></div>
+            <div class="color-swatch" style="background-color: #1f1d1b;"></div>
+          </div>
+        </div>
+        
+        <div class="svg-container">
+          <iframe src="output_color_squares/color_grid_Bangkok.svg" title="Bangkok coffee color grid"></iframe>
+          <div class="loading-message">Loading Bangkok visualization...</div>
+        </div>
+      </div>
+      
+      <div class="city-container">
+        <div class="city-info">
+          <h3 class="city-name">Berlin</h3>
+          <p class="city-description">Industrial elements with concrete and metal accents</p>
+          <div class="color-palette">
+            <div class="color-swatch" style="background-color: #cfc6bd;"></div>
+            <div class="color-swatch" style="background-color: #3b3632;"></div>
+            <div class="color-swatch" style="background-color: #9d8a73;"></div>
+            <div class="color-swatch" style="background-color: #a59695;"></div>
+            <div class="color-swatch" style="background-color: #d1bfa8;"></div>
+          </div>
+        </div>
+        
+        <div class="svg-container">
+          <iframe src="output_color_squares/color_grid_Berlin.svg" title="Berlin coffee color grid"></iframe>
+          <div class="loading-message">Loading Berlin visualization...</div>
+        </div>
+      </div>
+
+
+      <div class="city-container" id="losAngeles">
+        <div class="city-info">
+          <h2 class="city-name">Los Angeles</h2>
+          <p class="city-description">Sun-bleached neutrals with desert-inspired aesthetics</p>
+          <div class="color-palette">
+            <div class="color-swatch" style="background-color: #cbc6bc;"></div>
+            <div class="color-swatch" style="background-color: #5d534c;"></div>
+            <div class="color-swatch" style="background-color: #bfa995;"></div>
+            <div class="color-swatch" style="background-color: #1a1a1d;"></div>
+            <div class="color-swatch" style="background-color: #2f3532;"></div>
+          </div>
+        </div>
+        
+        <div class="svg-container">
+          <iframe src="output_color_squares/color_grid_Angeles.svg" title="Los Angeles coffee color grid" id="losAngelesFrame"></iframe>
+          <div class="loading-message">Loading Los Angeles visualization...</div>
+        </div>
+      </div>
+
+      <div class="city-container" id="london">
+        <div class="city-info">
+          <h2 class="city-name">London</h2>
+          <p class="city-description">British sensibility with modern pops of color</p>
+          <div class="color-palette">
+            <div class="color-swatch" style="background-color: #4E342E;"></div>
+            <div class="color-swatch" style="background-color: #a28c60;"></div>
+            <div class="color-swatch" style="background-color: #A1887F;"></div>
+            <div class="color-swatch" style="background-color: #E0E0E0;"></div>
+            <div class="color-swatch" style="background-color: #3E2723;"></div>
           </div>
         </div>
 
-        <p>
-          On Instagram, the world's cafés favor <strong>warm beiges, desaturated greens, and subtle grays</strong>. These are real-life spaces, styled for comfort and captured through phone cameras and natural light.
-        </p>
+        <div class="svg-container">
+          <iframe src="output_color_squares/color_grid_London.svg" title="London coffee color grid" id="londonFrame"></iframe>
+          <div class="loading-message">Loading London visualization...</div>
+        </div>
+      </div>
+
+              <div class="city-container" id="copenhagen">
+          <div class="city-info">
+            <h2 class="city-name">Copenhagen</h2>
+            <p class="city-description">Scandinavian minimalism with light woods</p>
+            <div class="color-palette">
+              <div class="color-swatch" style="background-color: #2e2c2b;"></div>
+              <div class="color-swatch" style="background-color: #beb6b2;"></div>
+              <div class="color-swatch" style="background-color: #d1c4ae;"></div>
+              <div class="color-swatch" style="background-color: #39392f;"></div>
+              <div class="color-swatch" style="background-color: #d7d0c4;"></div>
+            </div>
+          </div>
+          
+          <div class="svg-container">
+            <iframe src="output_color_squares/color_grid_Copenhagen.svg" title="Copenhagen coffee color grid" id="copenhagenFrame"></iframe>
+            <div class="loading-message">Loading Copenhagen visualization...</div>
+          </div>
+        </div>
+
+    </div>
+  </section>
+
+  <section class="overview-section">
+    <div class="overview-content">
+      <h2>Instagram's Palette vs. the Website's</h2>
+      <p>
+        Instagram reflects the daily atmosphere inside cafés through light, color, and coffee rituals. In contrast, coffee shop websites present a more curated and controlled image. When comparing each city's dominant Instagram tones to their website palettes, a clear visual gap emerged.
+      </p>
+
+      <div class="color-comparison">
+        <div class="color-profile">
+          <h3 class="color-profile-title">Average Instagram Color Profile per City</h3>
+          <img src="city_color_profiles.svg" alt="Most common Instagram color per city (KMeans)">
+        </div>
+        <div class="color-profile">
+          <h3 class="color-profile-title">Average Website Color Profile per City</h3>
+          <img src="clustered_city_colors.svg" alt="Mean Instagram color per city">
+        </div>
+      </div>
+
+      <p>
+        On Instagram, cafés around the world tend to favor warm beiges, muted greens, and soft grays. These images reflect real spaces, styled for comfort and captured with natural light.
+      </p>
+
+      <p>
+        In contrast, official café websites lean toward cooler, more restrained palettes. Gray tones, charcoal backgrounds, and white space dominate, creating a sense of controlled minimalism.
+      </p>
+
+      <p>This contrast highlights the gap between daily experience and curated image. Instagram captures how cafés feel in everyday life, while websites are designed to shape how they are perceived.
+      </p>
+    </div>
+  </section>
+
+  <section class="overview-section">
+    <div class="overview-content">
+      <h2>How Cafés Show Themselves: Instagram vs. Website</h2>
+      <p>
+        What cafés share on Instagram often differs from what they feature on their websites. I used object detection on thousands of images from both platforms and found consistent contrasts.
+      </p>
   
-        <p>
-          Compared to this, the **official café websites** (see Section 3) lean even more neutral — dominated by gray tones, dark charcoals, and minimalist white space. While Instagram celebrates warmth and tactility, websites speak in the language of **brand minimalism**.
-        </p>
+      <p>
+        Instagram highlights daily moments. The most common visuals include dogs, latte art, desserts, and cozy corners. These images focus on atmosphere and style. Websites, in comparison, center on baristas, brewing tools, architecture, and logos. These are branding elements meant to communicate professionalism and identity.
+      </p>
   
-        <p>
-          This contrast tells us something important: <em>Instagram shows how cafés are experienced. Websites show how cafés want to be perceived.</em>
-        </p>
+      <p>
+        This divide reflects two kinds of storytelling. Instagram captures how a café feels in everyday life. Websites show how a brand wants to be seen and remembered.
+      </p>
+  
+      <p>
+        Regional patterns also stood out. In countries like Thailand, Vietnam, and Taiwan, many cafés have no standalone websites. Instead, they rely entirely on Instagram for their digital presence, adopting a social-first strategy from the start.
+      </p>
+    </div>
+
+    <div class="text-comparison">
+      <div class="text-profile">
+        <h3 class="text-profile-title">Themes of Intro Text on Instagram</h3>
+        <img src="theme_percent_horizontal_colored_instagram.svg" alt="Most common Instagram theme of text bio">
+      </div>
+      <div class="text-profile">
+        <h3 class="text-profile-title">Themes of Intro Text on Website</h3>
+        <img src="theme_percent_horizontal_colored_website.svg" alt="Mean Instagram color per city">
       </div>
     </div>
-  </section>
-  <section class="overview-section">
-    <h2>How Cafés Show Themselves: Instagram vs. Website</h2>
+
     <div class="overview-content">
-      <p>
-        What cafés choose to share on Instagram often looks different from what they show on their websites. We ran object detection on thousands of photos across both sources and found some revealing contrasts.
-      </p>
-  
-      <p>
-        On Instagram, the most common visuals were dogs, latte art, desserts, and cozy corners — glimpses of daily life and aesthetic vignettes. Websites, by contrast, emphasized baristas, equipment, architecture, and logos. These are branding tools rather than lifestyle snapshots.
-      </p>
-  
-      <p>
-        The difference reflects intention. Instagram is about atmosphere. Websites are about identity. One shows how cafés feel. The other shows how cafés want to be perceived.
-      </p>
-  
-      <p>
-        Interestingly, we also found major geographic gaps. Many cafés in Thailand, Vietnam, and Taiwan had no functional websites at all — relying solely on Instagram for their digital presence. These markets skipped the dot-com era entirely, embracing social-first branding from the start.
-      </p>
-  
-      <p>
-        Below is a visual matrix comparing the most common objects found on each platform. Each icon could represent the presence and frequency of visual themes — from latte art and desserts to espresso machines and storefronts.
-      </p>
-  
-      <!-- INSERT ILLUSTRATION GRID OR ICON TABLE HERE -->
+      <h3>Platform Differences in How Cafés Present Themselves</h3>
+
+      <p>Instagram and official websites both offer insight into how third-wave cafés shape their online identities, but they serve different purposes.</p>
+
+      <h4>Instagram: Digital Slogans</h4>
+      <p>Instagram bios often act as quick, attention-grabbing statements. Many cafés highlight multiple locations, minimalist design, or community-friendly features like pet access and local events. These profiles are built for instant recognition and often feel more like slogans than detailed descriptions.</p>
+
+      <h4>Websites: Stories & Credibility</h4>
+      <p>Café websites tend to emphasize storytelling and trust. While they sometimes share themes with Instagram, such as a focus on design or local identity, websites usually go further. They highlight sourcing practices, share origin stories, and promote community values to present the brand as intentional and credible. </p>
+
+      <h4>What This Reveals</h4>
+      <p>One notable pattern is that many cafés list “no website” directly in their Instagram bios, a detail that obviously does not appear on websites. This contrast reflects how platform shapes message. Instagram promotes lifestyle and visual appeal. The website, when it exists, provides structure and meaning behind the brand.</p>
+
+      <p>In short, Instagram is where cafés signal lifestyle and aesthetics. The website is where they explain who they are and why they matter.</p>
     </div>
   </section>
-  <section class="overview-section" id="final-synthesis">
-    <h2>Final Visual Synthesis: What Defines a Third-Wave Coffee Neighborhood?</h2>
+
+  <section id="final-synthesis" class="overview-section">
     <div class="overview-content">
+      <h2>Final Visual Synthesis: What Defines a Third-Wave Coffee Neighborhood?</h2>
       <p>
-        As we reach the end of this visual journey, we zoom into three American cities to understand where, and why, third-wave coffee shops thrive. From the color of the walls to the shape of the city, the story is only complete when we add demographics.
+        As I reach the end of this visual journey, I zoom into three American cities to understand where, and why, third-wave coffee shops thrive. From the color of the walls to the shape of the city, the story is only complete when I add demographics.
       </p>
   
       <p>
-        Using U.S. Census data, we analyzed the neighborhoods where third-wave cafés are located in <strong>New York City</strong>, <strong>Miami</strong>, and <strong>Dallas</strong> — and found clear socioeconomic patterns. Third-wave cafés often flourish in places that are:
+        Using U.S. Census data, I analyzed the neighborhoods where third-wave cafés are located in <strong>New York City</strong>, <strong>Miami</strong>, and <strong>Dallas</strong> — and found clear socioeconomic patterns. Third-wave cafés often flourish in places that are:
       </p>
   
       <ul>
@@ -230,11 +835,12 @@
       </p>
   
       <div class="svg-container">
-        <img src="demographic_traits.png" alt="Density plots of demographic traits in neighborhoods with coffee shops" />
+        <img src="demographic_traits3.png" alt="Density plots of demographic traits in neighborhoods with coffee shops">
+
       </div>
   
       <p>
-        We then ran a logistic regression model to quantify the effect of each trait on café presence. The results are striking:
+        I then ran a logistic regression model to quantify the effect of each trait on café presence. The results are striking:
       </p>
   
       <ul>
@@ -247,363 +853,123 @@
         In other words, third-wave coffee shops tend to show up where upward mobility meets precarity — gentrifying zones, creative enclaves, and income-diverse areas on the rise.
       </p>
   
-      <div class="svg-container">
-        <img src="coffee_logit_coeff_horizontal.png" alt="Regression coefficient plot for coffee shop presence by state" />
-      </div>
-  
       <h3>Mapping the Coffee Footprint</h3>
       <p>
-        To visualize this more concretely, we mapped both the actual café locations and our predicted probabilities of café presence.
+        To visualize this more concretely, I mapped both the actual café locations and our predicted probabilities of café presence.
       </p>
   
       <h4>New York City</h4>
-      <div class="svg-container">
-        <img src="nyc_actual_count_map.svg" alt="NYC actual coffee locations" />
-        <figcaption><strong>Actual third-wave cafés</strong> in New York City</figcaption>
+      <div class="map-pair">
+        <div class="map-container">
+          <img src="nyc_actual_count_map.svg" alt="NYC actual coffee locations">
+          <figcaption><strong>Actual third-wave cafés</strong> in New York City</figcaption>
+          <p>The third-wave café scene is clustered in familiar territory: Williamsburg, Lower Manhattan, and parts of Brooklyn where gentrification and high-income density converge. Sparse coverage in the Bronx and eastern Queens reflects long-standing economic divides.</p>
+        </div>
+        <div class="map-container">
+          <img src="nyc_probability_map.svg" alt="NYC predicted coffee heatmap">
+          <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+          <p>Model predictions closely track reality. High-probability zones align with wealth, education, and rising rent. The model also highlights emerging pockets such as Ridgewood and southern Harlem, where cultural and economic shifts are beginning to create space for café growth.</p>
+        </div>
       </div>
-      <div class="svg-container">
-        <img src="nyc_probability_map.svg" alt="NYC predicted coffee heatmap" />
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
-      </div>
-  
+
       <h4>Miami</h4>
-      <div class="svg-container">
-        <img src="miami_actual_count_map.svg" alt="Miami actual coffee locations" />
-        <figcaption><strong>Actual third-wave cafés</strong> in Miami</figcaption>
+      <div class="map-pair">
+        <div class="map-container">
+          <img src="miami_actual_count_map.svg" alt="Miami actual coffee locations">
+          <figcaption><strong>Actual third-wave cafés</strong> in Miami</figcaption>
+          <p>Most specialty cafés are concentrated in central Dallas, particularly along Uptown, Bishop Arts, and Lower Greenville. The north–south divide is stark. Southern neighborhoods, many of which are lower-income and historically Black, show little to no café presence.</p>
+        </div>
+        <div class="map-container">
+          <img src="miami_probability_map.svg" alt="Miami predicted coffee heatmap">
+          <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+          <p>The regression model picks up more subtle signals. While it affirms high café likelihood in wealthier zones, it also identifies transitional tracts in Oak Cliff and East Dallas—areas where demographic shifts are underway, even if the cafés haven’t fully arrived.</p>
+        </div>
       </div>
-      <div class="svg-container">
-        <img src="miami_probability_map.svg" alt="Miami predicted coffee heatmap" />
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
-      </div>
-  
+
       <h4>Dallas</h4>
-      <div class="svg-container">
-        <img src="dallas_actual_count_map.svg" alt="Dallas actual coffee locations" />
-        <figcaption><strong>Actual third-wave cafés</strong> in Dallas</figcaption>
-      </div>
-      <div class="svg-container">
-        <img src="dallas_probability_map.svg" alt="Dallas predicted coffee heatmap" />
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+      <div class="map-pair">
+        <div class="map-container">
+          <img src="dallas_actual_count_map.svg" alt="Dallas actual coffee locations">
+          <figcaption><strong>Actual third-wave cafés</strong> in Dallas</figcaption>
+          <p>The café landscape here favors tourist-heavy and gentrifying corridors: Wynwood, Brickell, Coconut Grove. Little Haiti and Liberty City, though culturally rich, remain underrepresented in terms of third-wave presence.</p>
+        </div>
+        <div class="map-container">
+          <img src="dallas_probability_map.svg" alt="Dallas predicted coffee heatmap">
+          <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+          <p>Socioeconomic indicators highlight areas poised for change. The model predicts elevated café potential in parts of Allapattah and Little River, suggesting these neighborhoods may be on the cusp of aesthetic and economic transformation.</p>
+        </div>
       </div>
   
       <p>
-        These maps confirm what the data already told us: third-wave coffee isn't just about caffeine. It reflects — and often reinforces — broader urban dynamics. Taste, status, and change, all encoded in each cup.
+        These maps confirm what the data already showed. Third-wave coffee is not just about caffeine. It reflects and often reinforces broader urban dynamics. Each cup carries signals of taste, status, and change.
       </p>
     </div>
   </section>
-  <section class="final-view" id="final-takeaway">
-    <h2>The Coffee Aesthetic Is Also a Social Map</h2>
-    <p>
-      What began as a simple beverage has become a powerful visual and social signal. 
-      Third-wave cafés are not just places to drink coffee — they are markers of aspiration, design, and demographic change.
-    </p>
-    <p>
-      Across continents, the same clean aesthetics appear again and again. But underneath the warm wood and soft neutrals lie deeper patterns:
-      cafés emerge in neighborhoods that are changing, uneven, and full of tension — where young creatives, remote workers, and global tourists converge.
-    </p>
-    <p>
-      So the next time you step into a beautifully lit café with terrazzo counters and curated playlists, remember: you're not just seeing good taste. 
-      You're stepping into a larger story — one told through cities, culture, and the quiet power of coffee.
-    </p>
+
+  <section id="final-takeaway" class="final-view">
+    <div class="container">
+      <h2>The Coffee Aesthetic Is Also a Social Map</h2>
+      <p>
+        What began as a simple beverage has become a powerful visual and social signal. Third-wave cafés are no longer just places to drink coffee; they reflect aspiration, design, and demographic transformation.
+      </p>
+      <p>
+        Across continents, the same clean aesthetics surface with striking consistency. Beneath the warm wood and soft neutrals are deeper currents. These cafés tend to appear in neighborhoods undergoing change, where economic divides, cultural shifts, and new forms of labor intersect.
+      </p>
+      <p>
+        Stepping into a beautifully lit café with terrazzo counters and ambient playlists is more than a design choice. It is an encounter with the global language of taste, a visible trace of urban transition, and a quiet sign of where the world is heading. Beige is the color that the third-wave coffee culture rides.
+      </p>
+      <p>And you thought beige was boring.</p>
+    </div>
   </section>
-  
-<style>
-    body {
-      font-family: 'Georgia', serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f7f4;
-      color: #333;
-      line-height: 1.6;
-    }
-    
-    header {
-      background-color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      margin-bottom: 3rem;
-    }
-    
-    h1, h2, h3, h4 {
-      font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-weight: 600;
-      line-height: 1.3;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      margin: 2rem 0;
-    }
-    
-    .introduction {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-      line-height: 1.8;
-      font-size: 1.2rem;
-      text-align: center;
-    }
-    
-    .overview-section {
-      background-color: white;
-      padding: 4rem 2rem;
-      margin: 3rem 0;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .overview-content {
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-    
-    .emphasis {
-      font-style: italic;
-      color: #60442e;
-    }
-    
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1400px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-    
-    .map-grid figure {
-      margin: 0;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
-    }
-    
-    .map-grid figure:hover {
-      transform: translateY(-5px);
-    }
-    
-    .map-grid img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-    
-    .map-grid figcaption {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.4;
-    }
-    
-    .full-width-map {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .full-width-map img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .geography-section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      font-size: 1.2rem;
-      line-height: 1.8;
-    }
-    
-    .color-comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-    
-    .color-profile {
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .color-profile h3 {
-      margin-top: 0;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-    
-    .color-profile img {
-      width: 100%;
-      height: auto;
-    }
-    
-    .svg-container {
-      width: 100%;
-      height: 100vh;
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-    }
-    
-    .svg-container object,
-    .svg-container embed,
-    .svg-container img,
-    .svg-container iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border: none;
-    }
-    
-    .city-container {
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-      background-color: white;
-      margin: 3rem 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 2rem;
-    }
-    
-    .city-info {
-      position: absolute;
-      top: 50px;
-      left: 50px;
-      background-color: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 300px;
-      z-index: 10;
-    }
-    
-    .city-name {
-      font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 2rem;
-      font-weight: 600;
-      margin: 0;
-      margin-bottom: 0.5rem;
-    }
-    
-    .city-description {
-      font-size: 1.1rem;
-      line-height: 1.5;
-      margin: 0;
-      color: #555;
-    }
-    
-    .color-palette {
-      display: flex;
-      margin: 1rem 0;
-      height: 50px;
-      width: 100%;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    
-    .color-swatch {
-      flex: 1;
-    }
-    
-    .final-view {
-      padding: 5rem 2rem;
-      text-align: center;
-      background-color: white;
-      margin: 3rem 0;
-    }
-    
-    .final-view h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
-    
-    .final-view p {
-      max-width: 800px;
-      margin: 0 auto 2rem;
-      font-size: 1.2rem;
-      line-height: 1.8;
-    }
-    
-    .controls {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 10px;
-    }
-    
-    .control-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: white;
-      border: none;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      transition: transform 0.2s ease;
-    }
-    
-    .control-btn:hover {
-      transform: scale(1.1);
-      background: #f5f5f5;
-    }
-    
-    footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      color: #666;
-      font-size: 0.9rem;
-      background-color: white;
-      margin-top: 3rem;
-    }
-    
-    @media (max-width: 1200px) {
-      .map-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .map-grid {
-        grid-template-columns: 1fr;
-      }
+
+  <div class="methodology">
+    <div class="methodology-header">
+      <h3>Methodology</h3>
+      <button class="toggle-btn" aria-label="Toggle methodology section">+</button>
+    </div>
+    <div class="methodology-content">
+      <p>To understand the global aesthetic of third-wave coffee, I scraped 173 city pages from a specialty café map, extracted over 5,000 Instagram screenshots, and captured full-page website shots for 200+ cafés. Using OCR and fuzzy matching, I pulled bios and captions from noisy image data, then ran unsupervised topic modeling to identify themes like "minimal design" or "pet-friendly." I used BLIP (an open-source image captioning model) to auto-describe café visuals and clustered them by dominant tone.</p>
       
-      .city-info {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin-bottom: 2rem;
-      }
+      <p>To explore urban geography, I matched café coordinates to census tracts in NYC, Dallas, and Miami, and ran logistic regression models using ACS data (e.g., rent, income, education). The strongest predictor of café presence was high rent, followed by home value and income. This process stretched across scraping, AI,
+
+  <footer>
+    <p>A visual study of third-wave coffee shop aesthetics worldwide | Data collected from 5,000+ cafés across 91 cities</p>
+    <p>GitHub code: <a href="https://github.com/chilinhhovo/third-wave-coffeee">github.com/chilinhhovo/third-wave-coffeee</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle iframe loading
+      const iframes = document.querySelectorAll('iframe');
       
-      .color-comparison {
-        grid-template-columns: 1fr;
-      }
-    }
-</style>
-  
+      iframes.forEach(iframe => {
+        iframe.onload = function() {
+          // Hide loading message when iframe is loaded
+          const loadingMessage = iframe.nextElementSibling;
+          if (loadingMessage && loadingMessage.classList.contains('loading-message')) {
+            loadingMessage.style.display = 'none';
+          }
+        };
+        
+        iframe.onerror = function() {
+          // Show error in loading message
+          const loadingMessage = iframe.nextElementSibling;
+          if (loadingMessage && loadingMessage.classList.contains('loading-message')) {
+            loadingMessage.textContent = 'Failed to load SVG. Please check the setup instructions.';
+          }
+        };
+      });
+      
+      // Methodology toggle
+      const methodologyHeader = document.querySelector('.methodology-header');
+      const methodologyContent = document.querySelector('.methodology-content');
+      const toggleBtn = document.querySelector('.toggle-btn');
+      
+      methodologyHeader.addEventListener('click', function() {
+        methodologyContent.classList.toggle('active');
+        toggleBtn.textContent = methodologyContent.classList.contains('active') ? '−' : '+';
+      });
+    });
+  </script>
+</body>
+</html>
