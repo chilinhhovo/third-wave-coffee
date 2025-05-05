@@ -12,18 +12,27 @@ This project analyzes the global aesthetics and urban geography of third-wave co
 ### Process Summary
 - Scraped 173 city pages using Playwright; extracted Google My Maps embed links.
 - Manually downloaded 164 KML files after failed attempts to fully automate through Playwright due to Google Maps UI inconsistencies.
-- Parsed KML into café point coordinates (5,204 total) and linked them to Instagram content.
+- Parsed KML into café point coordinates (5,204 total)
+- Automated and refined the script manually for the scraping process of using Playwright to search for and save Instagram, website, Facebook and Tiktok links to csv files.
+- Automated and refined the script manually to scrape instamgram bios and website content.
+- Automated and refined script to take screenshots of 5,000+ Instagram accounts.
+- Automated and refined script to take screenshots of more than 200+ websites which each top, middle and bottom parts of coffee shops.
 - OCR-ed Instagram screenshots and matched noisy text to café metadata using fuzzy matching (RapidFuzz).
-- Used BLIP (Salesforce's image captioning model) to generate descriptive captions for 800+ screenshots.
-- Ran unsupervised topic modeling (FASTopic) on 2,500+ café bios to extract themes like minimal design, dog-friendly, and vegan options.
+- Scraped more than 200+ websites using Playwright extract.
+- Tried ChatGPT-vision model to detect objects but failed.
+- Tried ChatGPT-vision to cluster and define themes of texts but failed. 
+- Used BLIP (Salesforce's image captioning model), OWL-Vit to generate descriptive captions and detect objects in 6,000+ screenshots, this was more than 15 hours of laptop burning up. 
+- Ran unsupervised topic modeling (FASTopic) on 5,000+ café bios to extract themes like minimal design, dog-friendly, and vegan options.
+- Joined café coordinates back to csv with themes extracted files to map. 
 - Joined café coordinates to census tracts in NYC, Dallas, and Miami; ran logistic regression models on tract-level variables to estimate the probability of café presence.
 
 ### Technical Highlights
 - **Scraping**: Playwright, BeautifulSoup; scraped JS-heavy websites and manually reviewed tab automation flows.
 - **AI captioning**: BLIP model used locally for ~4 hours (CPU-bound); rejected >5% of generic outputs.
+- **Manual supervision** Less than 5% of incorrect Instagram links and websites after manually reviewed thousands of links and ran fact-check with Perplexity and ChatGPT.
 - **Topic modeling**: FASTopic clustered bios into ~30 themes; top words per cluster manually validated.
 - **Regression**: ACS data joined to café points by census tract; modeled effects of log income, rent, home value, Gini index, and education levels.
-- **Visualization**: Created horizontal bar charts (matplotlib) and probability maps using geopandas + DataWrapper.
+- **Visualization**: Created horizontal bar charts (matplotlib) and probability maps using geopandas.
 
 ### Regression Coefficients Summary
 | Variable              | NYC     | Dallas | Miami  |
@@ -41,6 +50,7 @@ This project analyzes the global aesthetics and urban geography of third-wave co
 - OCR quality varied by font style and screenshot clarity.
 - BLIP sometimes failed on image contrast or dark palettes.
 - ACS-based regression only applies where census data and café density overlap.
+- Student life and no money to support the project led to no chatGPT-vision model success since $90 was too expensive, so very sad. 
 
 ### Reflections
 This was the most technically ambitious project I’ve built to date. It taught me:
@@ -60,10 +70,10 @@ I would love to expand this work to cluster cafés globally by aesthetic similar
 - `README.md` (this file): Project narrative + reproducibility notes.
 
 ### Data Volume Summary
-- ✅ 173 cities scraped
-- ✅ 5,204 cafés geolocated
-- ✅ 2,273 Instagram screenshots processed
-- ✅ 2,500+ bios modeled
-- ✅ 50,000+ data points cleaned, matched, and visualized
+- 173 cities scraped
+- 5,204 cafés geolocated
+- 2,273 Instagram screenshots processed
+- 2,500+ bios modeled
+- 50,000+ data points cleaned, matched, and visualized
 
 
