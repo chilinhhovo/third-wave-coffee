@@ -68,6 +68,7 @@ I would love to expand this work to cluster cafés globally by aesthetic similar
 - `clean_and_merge.ipynb`: OCR matching, fuzzy logic, and dataset consolidation.
 - `coffee_logit_coeff_horizontal.svg`: Regression coefficient chart.
 - `README.md` (this file): Project narrative + reproducibility notes.
+To replicate the analysis, begin with scrape_thirdwaveneame.ipynb to gather base data, then proceed to clean_and_merge.ipynb for merging and text processing, followed by usingBLIP.ipynb for caption generation and theme detection. Use analyze_and_map.ipynb for regression and visualizations.
 
 ### Data Volume Summary
 - 173 cities scraped
