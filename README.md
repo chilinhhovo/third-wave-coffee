@@ -5,7 +5,7 @@ This project analyzes the global aesthetics and urban geography of third-wave co
 
 ### Data Sources
 - **Primary source**: [ThirdWaveNearMe.com](https://thirdwavenearme.com), a curated global map of specialty cafés.
-- **Instagram content**: Screenshots from verified café pages (2,273 images), OCR-extracted bios and captions.
+- **Instagram content**: Screenshots from verified café pages (5,276 images), OCR-extracted bios and captions.
 - **Census data**: American Community Survey (ACS 5-Year Estimates), tract-level data for New York City, Dallas, and Miami.
 - **Geospatial data**: U.S. Census TIGER/Line shapefiles + KML exports from Google My Maps.
 
@@ -56,7 +56,7 @@ This project analyzes the global aesthetics and urban geography of third-wave co
 This was the most technically ambitious project I’ve built to date. It taught me:
 - How to manage fuzzy, multi-source datasets.
 - How to chain scraping, AI, geospatial joins, and modeling together.
-- The limits of AI-generated captions and the value of manual validation.
+- The limits of AI-generated captions and the value of manual validation (eye-drops donation encouraged).
 - How to convert regression outputs into geographic storytelling.
 
 I would love to expand this work to cluster cafés globally by aesthetic similarity (using computer vision embedding models) or examine how neighborhood change precedes café appearance over time.
