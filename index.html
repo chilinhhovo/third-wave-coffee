@@ -127,7 +127,7 @@
       z-index: 1;
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 2rem 0 8rem;
+      padding: 0 2rem 0 10rem;
       text-align: left;
     }
     
@@ -1226,6 +1226,35 @@
       font-size: 1.02rem;
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
+
+    @media (max-width: 700px) {
+      .header-content {
+        max-width: 98vw !important;
+        padding: 0 1rem !important;
+        margin: 0 auto !important;
+        text-align: left !important;
+        display: block !important;
+        padding-left: 0 !important;
+      }
+      header h1 {
+        font-size: 2.1rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        margin-bottom: 1.2rem !important;
+        text-align: left !important;
+      }
+      header p {
+        font-size: 1.1rem !important;
+        margin-bottom: 1.2rem !important;
+        text-align: left !important;
+      }
+      .byline {
+        font-size: 1rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+      }
+    }
   </style>
 </head>
 
@@ -1253,7 +1282,9 @@
         <p>
           The third wave reimagines coffee as craft. This global movement emphasizes origin, process, and aesthetic. Cafés highlight single-origin beans, pour-over rituals, and hand-thrown ceramics. Design is central. Interiors often feature raw wood, soft light, and minimal ornamentation, projecting values like care, sustainability, and intentional living.
         </p>
-        
+        <p> 
+          As sociologist John Manzo writes in <a href="https://nsuworks.nova.edu/tqr/vol20/iss6/2/">The Qualitative Report (2015)</a>, third-wave coffeehouses are "venues where face-to-face sociability thrives," even as many traditional gathering places fade from urban life.
+        </p>
         <p>
           From Copenhagen to Chiang Mai, a shared visual language has emerged. Despite cultural differences, third-wave cafés around the world speak in the same tones: beige walls, terrazzo counters, curated playlists, and artisanal details. These choices are not just about taste. They signal a worldview shaped by slowness, transparency, and quiet aspiration.
         </p>
@@ -1261,7 +1292,7 @@
         <p>This movement is less about caffeine, and more about values: care, craft, and quiet connection.</p>
     
         <p>
-          This visual story traces how third-wave coffee culture has spread across the globe. I mapped over <strong>5,000 coffee shops</strong> in 91 cities, analyzed their Instagram aesthetics, and compared the color palettes and design language that define this cultural movement.
+          This visual story traces how third-wave coffee culture has spread across the globe. I mapped over <strong>5,000 coffee shops</strong> in 91 cities, analyzed their Instagram and wesbite aesthetics and language, and compared the palettes that define this cultural movement.
         </p>
     
         <p>
@@ -1341,7 +1372,7 @@
       </figure>
     </div>
 
-    <div class="section-inner">
+    <div class="section-inner geography-intro" style="padding-left: 3rem;">
       <p>
         The geography of third-wave cafés tells us as much about a city's social fabric as it does about coffee itself. In European cities like <strong>Berlin</strong>, <strong>Warsaw</strong>, and <strong>Amsterdam</strong>, coffee shops tend to be more evenly spread — mirroring the density and walkability of older urban cores. In contrast, cities like <strong>Bangkok</strong>, <strong>Phuket</strong>, and <strong>Bali</strong> show cafés clustered tightly around tourist zones, creative enclaves, or beach-adjacent nomad hubs. In North America, patterns skew toward affluence: in <strong>Dallas</strong>, <strong>Denver</strong>, and <strong>San Diego</strong>, third-wave cafés often align with gentrified neighborhoods or near tech and creative industry zones. What emerges is a global map of taste — not just for coffee, but for lifestyle.
       </p>
@@ -1356,15 +1387,24 @@
       <p>But scattered among these muted palettes are moments of contrast. Blues, reds, yellows, and the occasional purple cut through the calm with hints of local character. These colors are not just decorative. They introduce variation within the global template, offering clues about regional identity and personal expression.</p>
       
       <p>Rather than break the pattern, these accents add structure. They bring visual rhythm to the grid and suggest that even within a global style, there is space for individuality and surprise.</p>
+
+      <p>
+        "The look is minimal, warm, tactile," said Arindam Sengupta, creative director and founder of Rabbithole India. "Think light wood, raw concrete, soft linen. The palette stays neutral so the color comes from the coffee, the pastries, the people."
+      </p>
     </div>
     
     <div class="svg-container">
-      <iframe src="output_color_squares/all_cities_combined.svg" title="All cities combined color grid" id="allCitiesFrame"></iframe>
+      <iframe src="output_color_squares/all_cities_combined.svg" title="All cities combined color grid" id="allCitiesFrame" style="width:100%; height:700px;"></iframe>
       <div class="loading-message">Loading combined visualization...</div>
     </div>
     
-    <div class="section-inner">
-      <p>This visualization shows how third-wave coffee culture has created a consistent global style while still leaving room for local identity and individual expression. It reveals a balance between uniformity and variation, where each city's café scene feels both familiar and distinctly its own.</p>
+    <div class="section-inner svg-explanation-lower" style="margin-top:11rem; padding: 3rem 0 4rem 0;">
+      <div style="max-width:900px; margin:0 auto; font-size:1.13rem; color:#2d2320; background:#f6f3ee; border-radius:12px; padding:2.5rem 3rem; box-shadow:none;">
+        This visualization shows how third-wave coffee culture has created a consistent global style while still leaving room for local identity and individual expression. It reveals a balance between uniformity and variation, where each city's café scene feels both familiar and distinctly its own.
+        <p>
+          "The look is minimal, warm, tactile,"said Arindam Sengupta, creative director and previously Chief Creative Office of TBWA/Egypt. "Think light wood, raw concrete, soft linen. The palette stays neutral so the color comes from the coffee, the pastries, the people." This visualization reveals a balance between uniformity and variation, where each city's café scene feels both familiar and distinctly its own.
+        </p>
+      </div>
     </div>
 
     <div class="city-grid">
