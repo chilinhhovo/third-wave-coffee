@@ -1,0 +1,37 @@
+{
+    "fonts": [
+        {
+            "aifont": "Futura-Bold",
+            "family": "Futura",
+            "weight": "400",
+            "style": ""
+        },
+        {
+            "aifont": "HelveticaNeue-Medium",
+            "family": "Helvetica Neue",
+            "weight": "400",
+            "style": ""
+        },
+
+        {
+            "aifont": "HelveticaNeue-Regular",
+            "family": "Helvetica Neue",
+            "weight": "700",
+            "style": ""
+        },
+
+        {
+            "aifont": "HelveticaNeue-Bold",
+            "family": "Helvetica Neue",
+            "weight": "700",
+            "style": ""
+        },
+
+        {
+            "aifont": "HelveticaNeue-Bold",
+            "family": "Helvetica Neue",
+            "weight": "400",
+            "style": ""
+        }
+    ]
+}
