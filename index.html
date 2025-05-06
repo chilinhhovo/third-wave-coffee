@@ -556,13 +556,27 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 6px 6px 0 0;
+      transition: background 0.2s, box-shadow 0.2s;
     }
-    
+    .methodology-header:hover, .methodology-header:focus {
+      background: #a05a2c;
+      box-shadow: 0 2px 8px rgba(139,69,19,0.10);
+    }
     .methodology-header h3 {
       margin: 0;
       color: #fff;
       font-size: 1.3rem;
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      border-bottom: 2px solid #fff;
+      transition: border-color 0.2s;
+    }
+    .methodology-header:hover h3, .methodology-header:focus h3 {
+      border-bottom: 2px solid #ffbd59;
+    }
+    .toggle-btn:hover, .toggle-btn:focus {
+      background: #fff;
+      color: #8B4513;
+      outline: 2px solid #ffbd59;
     }
     
     .methodology-content {
@@ -1889,6 +1903,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
 
+  <!-- Standalone methodology toggle script (always runs last) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var methodologyHeader = document.querySelector('.methodology-header');
+      var methodologyContent = document.querySelector('.methodology-content');
+      var toggleBtn = document.querySelector('.toggle-btn');
+      if (methodologyHeader && methodologyContent && toggleBtn) {
+        methodologyHeader.addEventListener('click', function() {
+          methodologyContent.classList.toggle('active');
+          toggleBtn.textContent = methodologyContent.classList.contains('active') ? '−' : '+';
+        });
+      }
+    });
+  </script>
   
 </body>
 </html>
