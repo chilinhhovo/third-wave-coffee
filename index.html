@@ -34,6 +34,16 @@
       text-transform: none;
       letter-spacing: -2px;
     }
+    
+    
+    hr, .divider, .horizontal-line {
+    display: none !important;
+    border: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+  }
 
     h2 {
       font-size: 2.4rem;
@@ -539,60 +549,50 @@
     }
     
     /* Methodology Section */
-    .methodology {
+    .methodology-new {
       max-width: 900px;
       margin: 5rem auto;
-      background: none;
-      box-shadow: none;
-      border: none;
+      background: #f0e7de;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(139, 69, 19, 0.07);
+      padding: 0;
       overflow: visible;
     }
-    
-    .methodology-header {
+    .methodology-toggle {
+      width: 100%;
       background: #8B4513;
-      padding: 1.5rem 2rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 6px 6px 0 0;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .methodology-header:hover, .methodology-header:focus {
-      background: #a05a2c;
-      box-shadow: 0 2px 8px rgba(139,69,19,0.10);
-    }
-    .methodology-header h3 {
-      margin: 0;
       color: #fff;
       font-size: 1.3rem;
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      border-bottom: 2px solid #fff;
-      transition: border-color 0.2s;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      outline: none;
     }
-    .methodology-header:hover h3, .methodology-header:focus h3 {
-      border-bottom: 2px solid #ffbd59;
+    .methodology-toggle:focus, .methodology-toggle:hover {
+      background: #a05a2c;
+      box-shadow: 0 2px 8px rgba(139,69,19,0.10);
     }
-    .toggle-btn:hover, .toggle-btn:focus {
-      background: #fff;
-      color: #8B4513;
-      outline: 2px solid #ffbd59;
+    .methodology-toggle-icon {
+      font-size: 2rem;
+      margin-left: 1rem;
+      transition: transform 0.2s;
     }
-    
-    .methodology-content {
+    .methodology-toggle[aria-expanded="true"] .methodology-toggle-icon {
+      transform: rotate(45deg);
+    }
+    .methodology-content-new {
       padding: 2rem;
-      display: none;
-      background: #f0e7de;
-      border-radius: 0 0 6px 6px;
-    }
-    
-    .methodology-content.active {
-      display: block;
-    }
-    
-    .methodology-content p {
-      margin-bottom: 1.5rem;
+      background: #fff;
+      border-radius: 0 0 8px 8px;
       color: #2d2320;
+      font-size: 1.08rem;
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
     
@@ -1197,8 +1197,34 @@
         padding: 1rem 0.5rem;
       }
     }
-    hr {
-      display: none !important;
+
+    .methodology-static {
+      display: inline-block;
+      background: #f0e7de;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(139, 69, 19, 0.07);
+      padding: 0 0 1.2rem 0;
+      margin: 3rem auto 2rem auto;
+      min-width: 320px;
+      max-width: 98vw;
+    }
+    .methodology-static h2 {
+      background: #8B4513;
+      color: #fff;
+      font-size: 1.2rem;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      border-radius: 8px 8px 0 0;
+      margin: 0;
+      padding: 0.8rem 1.2rem;
+    }
+    .methodology-content-static {
+      padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+      background: #fff;
+      border-radius: 0 0 8px 8px;
+      color: #2d2320;
+      font-size: 1.02rem;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
   </style>
 </head>
@@ -1642,7 +1668,7 @@
           step: ".step",
           offset: 0.6,
           progress: false,
-          debug: true,
+          debug: false,
         })
         .onStepEnter(function ({ element, index, direction }) {
           showStep(index);
@@ -1752,18 +1778,17 @@
     </div>
   </section>
 
-  <div class="methodology">
-    <div class="methodology-header">
-      <h3>Methodology</h3>
-      <button class="toggle-btn" aria-label="Toggle methodology section">+</button>
-    </div>
-    <div class="methodology-content">
-     <p> This project mapped the global aesthetics and urban geography of third-wave coffee shops by combining web scraping, image captioning, OCR, multilingual translation, and census-based regression modeling. I scraped 173 city pages from ThirdWaveNearMe.com, manually extracted 164 KML files, and geocoded over 5,200 cafés. Playwright and BeautifulSoup were used to gather Instagram and website links. For cafés missing metadata, I automated Bing searches and used a fine-tuned classifier to flag likely Instagram profiles, which I then manually verified. Matching was especially difficult in non-Latin scripts like Mandarin, Japanese, and Russian; Thai cafés, by contrast, often included English names that improved match accuracy.</p>
-
+  <!-- RECODED METHODOLOGY SECTION -->
+  <section class="methodology-new" aria-labelledby="methodology-title">
+    <button class="methodology-toggle" id="methodology-toggle" aria-expanded="false" aria-controls="methodology-content">
+      <span id="methodology-title">Methodology</span>
+      <span class="methodology-toggle-icon" aria-hidden="true">+</span>
+    </button>
+    <div class="methodology-content-new" id="methodology-content" hidden>
+      <p>This project mapped the global aesthetics and urban geography of third-wave coffee shops by combining web scraping, image captioning, OCR, multilingual translation, and census-based regression modeling. I scraped 173 city pages from ThirdWaveNearMe.com, manually extracted 164 KML files, and geocoded over 5,200 cafés. Playwright and BeautifulSoup were used to gather Instagram and website links. For cafés missing metadata, I automated Bing searches and used a fine-tuned classifier to flag likely Instagram profiles, which I then manually verified. Matching was especially difficult in non-Latin scripts like Mandarin, Japanese, and Russian; Thai cafés, by contrast, often included English names that improved match accuracy.</p>
       <p>I scraped over 5,000 Instagram accounts and 200 websites, then applied OCR and translated multilingual bios using both Google Translate and ChatGPT-4o. To analyze visual content, I used BLIP and OWL-ViT to generate captions and detect objects across 6,000 images, then clustered themes using FASTopic. Café locations were joined to census tracts in New York, Dallas, and Miami and modeled using logistic regression. High rent and home value were the most consistent predictors of café presence, while income showed a weaker or negative effect. The workflow revealed how a global design language travels across cities.</p>
-
     </div>
-  </div>
+  </section>
 
   <footer>
     <div class="footer-content">
@@ -1903,8 +1928,55 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
 
+
   <!-- Standalone methodology toggle script (always runs last) -->
+
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // First, let's hide all horizontal lines that might be causing the brown lines
+  const horizontalLines = document.querySelectorAll('hr');
+  horizontalLines.forEach(line => {
+    line.style.display = 'none';
+  });
+  
+  // Also let's hide any other elements that might be causing horizontal lines
+  const mapPair = document.querySelectorAll('.map-pair');
+  mapPair.forEach(pair => {
+    const horizontalDividers = pair.querySelectorAll('hr, .divider');
+    horizontalDividers.forEach(divider => {
+      divider.style.display = 'none';
+    });
+  });
+  
+  // Fix methodology toggle functionality
+  const methodologyHeader = document.querySelector('.methodology-header');
+  const methodologyContent = document.querySelector('.methodology-content');
+  const toggleBtn = document.querySelector('.toggle-btn');
+  
+  if (methodologyHeader && methodologyContent && toggleBtn) {
+    // Make sure the methodology content starts hidden
+    methodologyContent.style.display = 'none';
+    
+    // Add proper event listener
+    methodologyHeader.addEventListener('click', function() {
+      // Toggle the active class
+      methodologyContent.classList.toggle('active');
+      
+      // Also explicitly toggle display style for compatibility
+      if (methodologyContent.classList.contains('active')) {
+        methodologyContent.style.display = 'block';
+        toggleBtn.textContent = '−';
+      } else {
+        methodologyContent.style.display = 'none';
+        toggleBtn.textContent = '+';
+      }
+    });
+  }
+
+  // Rest of your existing code...
+});
+  </script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       var methodologyHeader = document.querySelector('.methodology-header');
       var methodologyContent = document.querySelector('.methodology-content');
@@ -1916,7 +1988,72 @@
         });
       }
     });
-  </script>
+  </script> -->
+  <!-- <script>document.addEventListener('DOMContentLoaded', function() {
+  const methodologyHeader = document.querySelector('.methodology-header');
+  const methodologyContent = document.querySelector('.methodology-content');
+  const toggleBtn = document.querySelector('.toggle-btn');
   
+  if (methodologyHeader && methodologyContent && toggleBtn) {
+    methodologyHeader.addEventListener('click', function() {
+      methodologyContent.classList.toggle('active');
+      toggleBtn.textContent = methodologyContent.classList.contains('active') ? '−' : '+';
+    });
+  } else {
+    console.error('Methodology elements not found');
+  }
+});</script> -->
+
+  <!-- Standalone methodology toggle script for new section -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggle = document.getElementById('methodology-toggle');
+    var content = document.getElementById('methodology-content');
+    var icon = toggle.querySelector('.methodology-toggle-icon');
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      if (!expanded) {
+        content.hidden = false;
+        icon.textContent = '−';
+      } else {
+        content.hidden = true;
+        icon.textContent = '+';
+      }
+    });
+  });
+  </script>
+
+
+  <style>
+  .methodology-static {
+    display: inline-block;
+    background: #f0e7de;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(139, 69, 19, 0.07);
+    padding: 0 0 1.2rem 0;
+    margin: 3rem auto 2rem auto;
+    min-width: 320px;
+    max-width: 98vw;
+  }
+  .methodology-static h2 {
+    background: #8B4513;
+    color: #fff;
+    font-size: 1.2rem;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    border-radius: 8px 8px 0 0;
+    margin: 0;
+    padding: 0.8rem 1.2rem;
+  }
+  .methodology-content-static {
+    padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+    background: #fff;
+    border-radius: 0 0 8px 8px;
+    color: #2d2320;
+    font-size: 1.02rem;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+  </style>
 </body>
 </html>
