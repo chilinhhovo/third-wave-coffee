@@ -510,6 +510,8 @@
       position: relative;
       overflow: hidden;
       border-top: none;
+      border-bottom: none;
+      box-shadow: none;
     }
     
     .final-content {
@@ -1104,6 +1106,86 @@
         top: 0;
       }
     }
+
+    /* Add CSS for chart-annotation overlays */
+    .chart-annotation {
+      position: absolute;
+      top: 2.5%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.92);
+      color: #8B4513;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(139,69,19,0.07);
+      z-index: 2;
+      pointer-events: none;
+      max-width: 90%;
+      text-align: center;
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .chart-annotation {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.7rem;
+        max-width: 98vw;
+      }
+    }
+
+    /* Make scrollytelling charts larger for better SVG visibility */
+    .sticky-thing {
+      max-width: 1100px;
+      min-height: 500px;
+    }
+    .sticky-thing img {
+      max-width: 1100px;
+    }
+    @media (max-width: 1200px) {
+      .sticky-thing {
+        max-width: 98vw;
+        min-height: 300px;
+      }
+      .sticky-thing img {
+        max-width: 98vw;
+      }
+    }
+
+    /* Make scrollytelling charts even larger and reduce space below overlay text */
+    .sticky-thing {
+      max-width: 1400px;
+      min-height: 650px;
+      height: 70vh;
+    }
+    .sticky-thing img {
+      max-width: 1400px;
+      height: 60vh;
+    }
+    .step-textbox {
+      margin: 1.2rem auto 0 auto;
+      max-width: 1200px;
+      width: 100%;
+      padding: 1.2rem 2rem 1.2rem 2rem;
+    }
+    @media (max-width: 1600px) {
+      .sticky-thing {
+        max-width: 98vw;
+        min-height: 350px;
+        height: 50vw;
+      }
+      .sticky-thing img {
+        max-width: 98vw;
+        height: 40vw;
+      }
+      .step-textbox {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+      }
+    }
+    hr {
+      display: none !important;
+    }
   </style>
 </head>
 
@@ -1471,135 +1553,170 @@
       <img id="chart-step-img-2" src="charts/census_traits_by_city-03.svg" alt="Chart step 3">
       <img id="chart-step-img-3" src="charts/census_traits_by_city-04.svg" alt="Chart step 4">
       <img id="chart-step-img-4" src="charts/census_traits_by_city-05.svg" alt="Chart step 5">
+      <img id="chart-step-img-5" src="charts/census_traits_by_city-01.svg" alt="Chart step 1 again">
+      <!-- Overlay annotations for each chart -->
+      <div class="chart-annotation" id="annotation-0">Intro: High income clustering in NYC café neighborhoods</div>
+      <div class="chart-annotation" id="annotation-1">Education levels: Dallas nearly matches NYC</div>
+      <div class="chart-annotation" id="annotation-2">Miami café tracts: rent range is much wider</div>
+      <div class="chart-annotation" id="annotation-3">NYC cafés: deeply embedded in real estate hot zones</div>
+      <div class="chart-annotation" id="annotation-4">All café neighborhoods: higher inequality than US average</div>
+      <div class="chart-annotation" id="annotation-5">Recap: Income clustering in NYC café neighborhoods</div>
       <div class="step-textbox" id="scrolly-caption-box"></div>
     </div>
     <div class="steps-container">
-      <div class="step" id="step1"><span style="display:block; height: 60vh;"></span></div>
-      <div class="step" id="step2"><span style="display:block; height: 60vh;"></span></div>
-      <div class="step" id="step3"><span style="display:block; height: 60vh;"></span></div>
-      <div class="step" id="step4"><span style="display:block; height: 60vh;"></span></div>
-      <div class="step" id="step5"><span style="display:block; height: 60vh;"></span></div>
+      <div class="step" id="step1"><span style="display:block; height: 90vh;"></span></div>
+      <div class="step" id="step2"><span style="display:block; height: 90vh;"></span></div>
+      <div class="step" id="step3"><span style="display:block; height: 90vh;"></span></div>
+      <div class="step" id="step4"><span style="display:block; height: 90vh;"></span></div>
+      <div class="step" id="step5"><span style="display:block; height: 90vh;"></span></div>
+      <div class="step" id="step6"><span style="display:block; height: 90vh;"></span></div>
     </div>
   </section>
 
   <script>
-  (function() {
-    const scroller = scrollama();
-    const captions = [
-      "NYC's café neighborhoods aren't just richer — they cluster tightly at the top, meaning almost no third-wave cafés exist in lower-income areas, unlike Miami and Dallas, which have longer income \"tails.\"",
-      "Dallas nearly matches NYC in education levels around cafés, even though it lags behind in income and housing, suggesting that education, not just wealth, may be a stronger predictor for third-wave presence there.",
-      "Unlike NYC, where café rents cluster in a narrow, high band, Miami's café tracts span a wider range, some cafés exist in relatively affordable areas, indicating rent isn't always a barrier.",
-      "Even though Dallas and Miami look similar on this chart, they're both dramatically lower than NYC, suggesting NYC cafés are deeply embedded in real estate hot zones, while others adapt to more transitional or mid-range areas.",
-      "While Miami has the most extreme inequality, café neighborhoods in all three cities are more unequal than the national average — suggesting that third-wave coffee often thrives in places with big income gaps, not just universally wealthy areas."
-    ];
-    const captionBox = document.getElementById('scrolly-caption-box');
-    captionBox.textContent = captions[0];
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      const scroller = scrollama();
+      const captions = [
+        "NYC's café neighborhoods aren't just richer — they cluster tightly at the top, meaning almost no third-wave cafés exist in lower-income areas, unlike Miami and Dallas, which have longer income \"tails.\" (Intro)",
+        "Dallas nearly matches NYC in education levels around cafés, even though it lags behind in income and housing, suggesting that education, not just wealth, may be a stronger predictor for third-wave presence there.",
+        "Unlike NYC, where café rents cluster in a narrow, high band, Miami's café tracts span a wider range, some cafés exist in relatively affordable areas, indicating rent isn't always a barrier.",
+        "Even though Dallas and Miami look similar on this chart, they're both dramatically lower than NYC, suggesting NYC cafés are deeply embedded in real estate hot zones, while others adapt to more transitional or mid-range areas.",
+        "While Miami has the most extreme inequality, café neighborhoods in all three cities are more unequal than the national average — suggesting that third-wave coffee often thrives in places with big income gaps, not just universally wealthy areas.",
+        "NYC's café neighborhoods aren't just richer — they cluster tightly at the top, meaning almost no third-wave cafés exist in lower-income areas, unlike Miami and Dallas, which have longer income \"tails.\" (Recap)"
+      ];
+      const annotations = [
+        "Intro: High income clustering in NYC café neighborhoods",
+        "Education levels: Dallas nearly matches NYC",
+        "Miami café tracts: rent range is much wider",
+        "NYC cafés: deeply embedded in real estate hot zones",
+        "All café neighborhoods: higher inequality than US average",
+        "Recap: Income clustering in NYC café neighborhoods"
+      ];
+      const captionBox = document.getElementById('scrolly-caption-box');
+      if (!captionBox) throw new Error('Caption box not found');
+      captionBox.textContent = captions[0];
 
-    function showStep(idx) {
-      for (let i = 0; i < 5; i++) {
-        const img = document.getElementById('chart-step-img-' + i);
-        if (i === idx) img.classList.add('active');
-        else img.classList.remove('active');
-      }
-      captionBox.textContent = captions[idx];
-    }
-
-    scroller
-      .setup({
-        parent: document.querySelector("#scrolly-charts-section"),
-        step: ".step",
-        offset: 0.6,
-        progress: false,
-        debug: false,
-      })
-      .onStepEnter(function ({ element, index, direction }) {
-        showStep(index);
-      })
-      .onStepExit(function({ element, index, direction }) {
-        if (direction === 'up' && index > 0) {
-          showStep(index - 1);
+      function showStep(idx) {
+        for (let i = 0; i < 6; i++) {
+          const img = document.getElementById('chart-step-img-' + i);
+          const annotation = document.getElementById('annotation-' + i);
+          if (!img) console.error('Missing image for step', i);
+          if (!annotation) console.error('Missing annotation for step', i);
+          if (i === idx) {
+            if (img) img.classList.add('active');
+            if (annotation) annotation.style.display = 'block';
+          } else {
+            if (img) img.classList.remove('active');
+            if (annotation) annotation.style.display = 'none';
+          }
         }
-      });
-    window.addEventListener("resize", scroller.resize);
-    showStep(0);
-  })();
+        captionBox.textContent = captions[idx];
+      }
+
+      // Hide all annotations except the first on load
+      for (let i = 1; i < 6; i++) {
+        const ann = document.getElementById('annotation-' + i);
+        if (ann) ann.style.display = 'none';
+      }
+      const ann0 = document.getElementById('annotation-0');
+      if (ann0) ann0.style.display = 'block';
+
+      scroller
+        .setup({
+          parent: document.querySelector("#scrolly-charts-section"),
+          step: ".step",
+          offset: 0.6,
+          progress: false,
+          debug: true,
+        })
+        .onStepEnter(function ({ element, index, direction }) {
+          showStep(index);
+        })
+        .onStepExit(function({ element, index, direction }) {
+          if (direction === 'up' && index > 0) {
+            showStep(index - 1);
+          }
+        });
+      window.addEventListener("resize", scroller.resize);
+      showStep(0);
+    } catch (e) {
+      console.error('Scrollytelling error:', e);
+    }
+  });
   </script>
-    <div class="full-map scrolly-container" id="scrolly-charts">
-      <img class="scrolly-fade active" id="scrolly-chart-1" src="charts/census_traits_by_city-01.svg" alt="Density plots of demographic traits in neighborhoods with coffee shops">
-      <img class="scrolly-fade" id="scrolly-chart-2" src="demographic_traits.png" alt="Density plots of demographic traits in neighborhoods with coffee shops">
-    </div>
-  
-    <div class="section-inner">
-      <p>
-        I then ran a logistic regression model to quantify the effect of each trait on café presence. The results are striking:
-      </p>
-  
-      <ul>
-        <li>In <strong>New York</strong>, inequality (GINI) and rent levels were the strongest predictors</li>
-        <li>In <strong>Texas</strong>, inequality played a similar role, followed by home values</li>
-        <li>In <strong>Florida</strong>, education and rent mattered more than income itself</li>
-      </ul>
-  
-      <p>
-        In other words, third-wave coffee shops tend to show up where upward mobility meets precarity — gentrifying zones, creative enclaves, and income-diverse areas on the rise.
-      </p>
-  
-      <h3>Mapping the Coffee Footprint</h3>
-      <p>
-        To visualize this more concretely, I mapped both the actual café locations and our predicted probabilities of café presence.
-      </p>
-    </div>
-  
-    <div class="map-pair">
-      <div class="map-container">
-        <div class="city-title">New York City</div>
-        <img src="nyc_actual_count_map.svg" alt="NYC actual coffee locations">
-        <figcaption><strong>Actual third-wave cafés</strong> in New York City</figcaption>
-        <p>The third-wave café scene is clustered in familiar territory: Williamsburg, Lower Manhattan, and parts of Brooklyn where gentrification and high-income density converge. Sparse coverage in the Bronx and eastern Queens reflects long-standing economic divides.</p>
-      </div>
-      <div class="map-container">
-        <div class="city-title">New York City</div>
-        <img src="nyc_probability_map.svg" alt="NYC predicted coffee heatmap">
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
-        <p>Model predictions closely track reality. High-probability zones align with wealth, education, and rising rent. The model also highlights emerging pockets such as Ridgewood and southern Harlem, where cultural and economic shifts are beginning to create space for café growth.</p>
-      </div>
-    </div>
 
-    <div class="map-pair">
-      <div class="map-container">
-        <div class="city-title">Miami</div>
-        <img src="miami_actual_count_map.svg" alt="Miami actual coffee locations">
-        <figcaption><strong>Actual third-wave cafés</strong> in Miami</figcaption>
-        <p>The café landscape here favors tourist-heavy and gentrifying corridors: Wynwood, Brickell, Coconut Grove. Little Haiti and Liberty City, though culturally rich, remain underrepresented in terms of third-wave presence.</p>
-      </div>
-      <div class="map-container">
-        <div class="city-title">Miami</div>
-        <img src="miami_probability_map.svg" alt="Miami predicted coffee heatmap">
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
-        <p>Socioeconomic indicators highlight areas poised for change. The model predicts elevated café potential in parts of Allapattah and Little River, suggesting these neighborhoods may be on the cusp of aesthetic and economic transformation.</p>
-      </div>
-    </div>
-
-    <div class="map-pair">
-      <div class="map-container">
-        <div class="city-title">Dallas</div>
-        <img src="dallas_actual_count_map.svg" alt="Dallas actual coffee locations">
-        <figcaption><strong>Actual third-wave cafés</strong> in Dallas</figcaption>
-        <p>Most specialty cafés are concentrated in central Dallas, particularly along Uptown, Bishop Arts, and Lower Greenville. The north–south divide is stark. Southern neighborhoods, many of which are lower-income and historically Black, show little to no café presence.</p>
-      </div>
-      <div class="map-container">
-        <div class="city-title">Dallas</div>
-        <img src="dallas_probability_map.svg" alt="Dallas predicted coffee heatmap">
-        <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
-        <p>The regression model picks up more subtle signals. While it affirms high café likelihood in wealthier zones, it also identifies transitional tracts in Oak Cliff and East Dallas—areas where demographic shifts are underway, even if the cafés haven't fully arrived.</p>
-      </div>
-    </div>
+  <div class="section-inner">
+    <p>
+      I then ran a logistic regression model to quantify the effect of each trait on café presence. The results are striking:
+    </p>
   
-    <div class="section-inner">
-      <p>
-        These maps confirm what the data already showed. Third-wave coffee is not just about caffeine. It reflects and often reinforces broader urban dynamics. Each cup carries signals of taste, status, and change.
-      </p>
+    <ul>
+      <li>In <strong>New York</strong>, inequality (GINI) and rent levels were the strongest predictors</li>
+      <li>In <strong>Texas</strong>, inequality played a similar role, followed by home values</li>
+      <li>In <strong>Florida</strong>, education and rent mattered more than income itself</li>
+    </ul>
+  
+    <p>
+      In other words, third-wave coffee shops tend to show up where upward mobility meets precarity — gentrifying zones, creative enclaves, and income-diverse areas on the rise.
+    </p>
+  
+    <h3>Mapping the Coffee Footprint</h3>
+    <p>
+      To visualize this more concretely, I mapped both the actual café locations and our predicted probabilities of café presence.
+    </p>
+  </div>
+
+  <div class="map-pair">
+    <div class="map-container">
+      <div class="city-title">New York City</div>
+      <img src="nyc_actual_count_map.svg" alt="NYC actual coffee locations">
+      <figcaption><strong>Actual third-wave cafés</strong> in New York City</figcaption>
+      <p>The third-wave café scene is clustered in familiar territory: Williamsburg, Lower Manhattan, and parts of Brooklyn where gentrification and high-income density converge. Sparse coverage in the Bronx and eastern Queens reflects long-standing economic divides.</p>
     </div>
+    <div class="map-container">
+      <div class="city-title">New York City</div>
+      <img src="nyc_probability_map.svg" alt="NYC predicted coffee heatmap">
+      <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+      <p>Model predictions closely track reality. High-probability zones align with wealth, education, and rising rent. The model also highlights emerging pockets such as Ridgewood and southern Harlem, where cultural and economic shifts are beginning to create space for café growth.</p>
+    </div>
+  </div>
+
+  <div class="map-pair">
+    <div class="map-container">
+      <div class="city-title">Miami</div>
+      <img src="miami_actual_count_map.svg" alt="Miami actual coffee locations">
+      <figcaption><strong>Actual third-wave cafés</strong> in Miami</figcaption>
+      <p>The café landscape here favors tourist-heavy and gentrifying corridors: Wynwood, Brickell, Coconut Grove. Little Haiti and Liberty City, though culturally rich, remain underrepresented in terms of third-wave presence.</p>
+    </div>
+    <div class="map-container">
+      <div class="city-title">Miami</div>
+      <img src="miami_probability_map.svg" alt="Miami predicted coffee heatmap">
+      <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+      <p>Socioeconomic indicators highlight areas poised for change. The model predicts elevated café potential in parts of Allapattah and Little River, suggesting these neighborhoods may be on the cusp of aesthetic and economic transformation.</p>
+    </div>
+  </div>
+
+  <div class="map-pair">
+    <div class="map-container">
+      <div class="city-title">Dallas</div>
+      <img src="dallas_actual_count_map.svg" alt="Dallas actual coffee locations">
+      <figcaption><strong>Actual third-wave cafés</strong> in Dallas</figcaption>
+      <p>Most specialty cafés are concentrated in central Dallas, particularly along Uptown, Bishop Arts, and Lower Greenville. The north–south divide is stark. Southern neighborhoods, many of which are lower-income and historically Black, show little to no café presence.</p>
+    </div>
+    <div class="map-container">
+      <div class="city-title">Dallas</div>
+      <img src="dallas_probability_map.svg" alt="Dallas predicted coffee heatmap">
+      <figcaption><strong>Predicted hotspots</strong> based on regression</figcaption>
+      <p>The regression model picks up more subtle signals. While it affirms high café likelihood in wealthier zones, it also identifies transitional tracts in Oak Cliff and East Dallas—areas where demographic shifts are underway, even if the cafés haven't fully arrived.</p>
+    </div>
+  </div>
+
+  <div class="section-inner">
+    <p>
+      These maps confirm what the data already showed. Third-wave coffee is not just about caffeine. It reflects and often reinforces broader urban dynamics. Each cup carries signals of taste, status, and change.
+    </p>
+  </div>
   </section>
 
   <section class="final-view">
