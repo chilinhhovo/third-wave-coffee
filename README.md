@@ -73,7 +73,7 @@ To quantify the visual identity of each city’s cafés:
 | log_home_value        | 1.1426  | 1.6046 | 2.0776 |
 | gini_index            | 8.0569  | 5.4155 | 1.5188 |
 
-🗺️ These models helped produce city-level maps predicting future café locations based on underlying socioeconomic traits.
+These models helped produce city-level maps predicting future café locations based on underlying socioeconomic traits.
 
 ### Limitations
 - Google My Maps KML export is not publicly accessible via API, requiring semi-manual tab interaction.
