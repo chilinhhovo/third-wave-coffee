@@ -1,28 +1,58 @@
-## README.md — Methodology and Reflection
+## README.md — Third-Wave Coffee Project 
+A global visual and statistical analysis of specialty cafés and their urban geographies
 
 ### Project Overview
-This project analyzes the global aesthetics and urban geography of third-wave coffee shops using a combination of scraped metadata, AI-generated image captions, and census-based regression modeling. The goal was to move beyond simple charting to build a complex data pipeline from raw scraping to statistical inference and interactive storytelling.
+This project explores the visual branding and spatial distribution of third-wave coffee shops around the world. It combines:
+- Web scraping
+- Image captioning with AI models
+- Optical character recognition (OCR)
+- Theme clustering
+- Census-based regression analysis
+- Interactive visual storytelling
+
+The aim was to map the “aesthetic logic” of third-wave cafés and analyze where, and why, they appear in urban environments.
 
 ### Data Sources
 - **Primary source**: [ThirdWaveNearMe.com](https://thirdwavenearme.com), a curated global map of specialty cafés.
 - **Instagram content**: Screenshots from verified café pages (5,276 images), OCR-extracted bios and captions.
+- **Websites**: 200+ homepage screenshots; metadata scraped
 - **Census data**: American Community Survey (ACS 5-Year Estimates), tract-level data for New York City, Dallas, and Miami.
 - **Geospatial data**: U.S. Census TIGER/Line shapefiles + KML exports from Google My Maps.
 
 ### Process Summary
-- Scraped 173 city pages using Playwright; extracted Google My Maps embed links.
-- Manually downloaded 164 KML files after failed attempts to fully automate through Playwright due to Google Maps UI inconsistencies.
-- Parsed KML into café point coordinates (5,204 total)
-- Automated and refined the script manually for the scraping process of using Playwright to search for and save Instagram, website, Facebook and Tiktok links to csv files.
-- Automated and refined the script manually to scrape instamgram bios and website content.
-- Automated and refined script to take screenshots of 5,000+ Instagram accounts.
-- Automated and refined script to take screenshots of more than 200+ websites which each top, middle and bottom parts of coffee shops.
-- OCR-ed Instagram screenshots and matched noisy text to café metadata using fuzzy matching (RapidFuzz).
-- Scraped more than 200+ websites using Playwright extract.
-- Tried ChatGPT-vision model to detect objects but failed.
-- Tried ChatGPT-vision to cluster and define themes of texts but failed. 
-- Used BLIP (Salesforce's image captioning model), OWL-Vit to generate descriptive captions and detect objects in 6,000+ screenshots, this was more than 15 hours of laptop burning up. 
-- Ran unsupervised topic modeling (FASTopic) on 5,000+ café bios to extract themes like minimal design, dog-friendly, and vegan options.
+**1.Web Scraping**
+- Scraped nearly 100 city pages using Playwright
+- Parsed 100 KML files from Google My Maps (5,204 café locations)
+- Manually refined Bing search to gather website and social links from Bing
+- USed Playwright to automate social links scraping process and manual checks of 5,000+ links afterwards
+- Extracted social links (Instagram, websites) and saved to CSV
+
+**2.Instagram & Website Content** 
+- Captured 5,191 full-page Instagram screenshots using automated browser scripting
+- Took 3-part screenshots (top/middle/bottom) of 200+ websites, automated browser scripting
+- Ran OCR on images using Tesseract; matched to café metadata via fuzzy logic (RapidFuzz)
+
+**3.AI Vision + Captioning** 
+- Ran BLIP (Salesforce) and OWL-ViT to generate captions and object tags on 6,000+ images
+- Rejected generic or inaccurate outputs manually
+
+**4.Theme Clustering** 
+Used a hybrid method:
+- Ran FASTopic on ~500 bios
+- Manually classified outputs into buckets: minimalist design, dog-friendly, plant-heavy, laptop zones, vegan, kid-friendly, vintage aesthetic, and more
+- The AI model provided raw clusters; these were interpreted, validated, and labeled by hand
+- Labeled ~5,000 café bios into these predefined theme categories
+
+**5.Color Analysis** 
+To quantify the visual identity of each city’s cafés:
+- Used Playwright screenshots from Instagram and websites
+- For each image:
+    Applied K-Means clustering (k=5) on RGB values (converted to CIELAB for perceptual accuracy)
+    Extracted the top 1–2 dominant colors per image
+- Aggregated all café colors within each city and computed mean RGB color
+- Visualized results as city-level swatches, revealing dominant aesthetic tones (e.g., warm beiges, tropical greens, icy neutrals)
+
+**6. Data merging** 
 - Joined café coordinates back to csv with themes extracted files to map. 
 - Joined café coordinates to census tracts in NYC, Dallas, and Miami; ran logistic regression models on tract-level variables to estimate the probability of café presence.
 
@@ -70,8 +100,14 @@ I would love to expand this work to cluster cafés globally by aesthetic similar
 - `README.md` (this file): Project narrative + reproducibility notes.
 To replicate the analysis, begin with scrape_thirdwaveneame.ipynb to gather base data, then proceed to clean_and_merge.ipynb for merging and text processing, followed by usingBLIP.ipynb for caption generation and theme detection. Use analyze_and_map.ipynb for regression and visualizations.
 
+To replicate:
+1. Run scrape_thirdwaveneame.ipynb
+2. Clean + join data in clean_and_merge.ipynb
+3. Generate image captions + assign themes via usingBLIP.ipynb
+4. Run modeling and mapping in analyze_and_map.ipynb
+
 ### Data Volume Summary
-- 91 cities scraped
+- 90+ cities scraped
 - 5,204 cafés geolocated
 - 5,191 Instagram screenshots processed
 - 5,000+ bios modeled
