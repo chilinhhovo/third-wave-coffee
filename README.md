@@ -71,10 +71,10 @@ I would love to expand this work to cluster cafés globally by aesthetic similar
 To replicate the analysis, begin with scrape_thirdwaveneame.ipynb to gather base data, then proceed to clean_and_merge.ipynb for merging and text processing, followed by usingBLIP.ipynb for caption generation and theme detection. Use analyze_and_map.ipynb for regression and visualizations.
 
 ### Data Volume Summary
-- 173 cities scraped
+- 91 cities scraped
 - 5,204 cafés geolocated
-- 2,273 Instagram screenshots processed
-- 2,500+ bios modeled
-- 50,000+ data points cleaned, matched, and visualized
+- 5,191 Instagram screenshots processed
+- 5,000+ bios modeled
+- 6,000+ data points cleaned, matched, and visualized
 
 
