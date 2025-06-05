@@ -111,15 +111,8 @@
     }
     
     header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('/api/placeholder/1200/800') center/cover no-repeat;
-      opacity: 0.08;
-      z-index: 0;
+      /* Remove the animated background image */
+      display: none !important;
     }
     
     .header-content {
@@ -1321,55 +1314,31 @@
     
     <div class="map-grid">
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="amsterdam-map-img">+</button>
-          <button class="zoom-out" data-map="amsterdam-map-img">−</button>
-        </div>
         <img id="amsterdam-map-img" src="output_svgs/map_amsterdam.svg" alt="Amsterdam coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Amsterdam: Dotted with canals and caffeine, most cafés cluster on the west side of the Centrum.</figcaption>
       </figure>
   
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="barcelona-map-img">+</button>
-          <button class="zoom-out" data-map="barcelona-map-img">−</button>
-        </div>
         <img id="barcelona-map-img" src="output_svgs/map_barcelona.svg" alt="Barcelona coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Barcelona: A tight spread across Eixample and Sant Antoni, not far from La Familia, and Gaudí's legacies.</figcaption>
       </figure>
   
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="berlin-map-img">+</button>
-          <button class="zoom-out" data-map="berlin-map-img">−</button>
-        </div>
         <img id="berlin-map-img" src="output_svgs/map_berlin-01.svg" alt="Berlin coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Berlin: Third-wave hotspots orbit Kreuzberg, Neukölln, and Mitte's creative quarters.</figcaption>
       </figure>
   
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="bali-map-img">+</button>
-          <button class="zoom-out" data-map="bali-map-img">−</button>
-        </div>
         <img id="bali-map-img" src="output_svgs/map_bali.svg" alt="Bali coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Bali (Canggu): Cafés map perfectly onto surf-town sprawl and coworking enclaves.</figcaption>
       </figure>
   
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="chiangmai-map-img">+</button>
-          <button class="zoom-out" data-map="chiangmai-map-img">−</button>
-        </div>
         <img id="chiangmai-map-img" src="output_svgs/map_chiang_mai.svg" alt="Chiang Mai coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Chiang Mai: From Old Town to Nimman, every block brews something new.</figcaption>
       </figure>
   
       <figure class="svg-container" style="margin-bottom: 0; align-self: flex-start; position: relative; background: #fff; border-radius: 8px; box-shadow: none; padding: 0; width: 100%; max-width: 100%; height: 500px; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden;">
-        <div class="zoom-controls" style="display: flex; gap: 0.5rem; justify-content: flex-end; padding: 0.5rem 1rem 0 0;">
-          <button class="zoom-in" data-map="chiangrai-map-img">+</button>
-          <button class="zoom-out" data-map="chiangrai-map-img">−</button>
-        </div>
         <img id="chiangrai-map-img" src="output_svgs/map_chiang_rai.svg" alt="Chiang Rai coffee map" style="transition: transform 0.2s; max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto;">
         <figcaption>Chiang Rai: Small but dense with a surprising number of roasters near the night market.</figcaption>
       </figure>
@@ -1389,7 +1358,7 @@
       
       <p>Subtle color variations mark regional character. In Toronto, muted blues temper concrete and clay. In Bangkok, tropical woods pair with bold accents. Medellín blends warm grays with natural light. Melbourne's palette of wood, stone, and metal reflects a balance of industrial and cozy.</p>
       <p>
-        “The look is minimal, warm, tactile,” said Arindam Sengupta, founder of Rabbithole India and former chief creative officer at TBWA/Egypt. “Think light wood, raw concrete, soft linen. The palette stays neutral so the color comes from the coffee, the pastries, the people.”
+        "The look is minimal, warm, tactile," said Arindam Sengupta, founder of Rabbithole India and former chief creative officer at TBWA/Egypt. "Think light wood, raw concrete, soft linen. The palette stays neutral so the color comes from the coffee, the pastries, the people."
       </p>
     </div>
     
@@ -1546,7 +1515,7 @@
       </p>
 
       <p>
-        In many Southeast Asian countries, standalone websites are rare. Instagram often functions as the café’s only public presence. Bios tend to be short, slogan-like statements focused on design, location, or community. Websites, when available, include sourcing stories, sustainability claims, and design philosophies.
+        In many Southeast Asian countries, standalone websites are rare. Instagram often functions as the café's only public presence. Bios tend to be short, slogan-like statements focused on design, location, or community. Websites, when available, include sourcing stories, sustainability claims, and design philosophies.
       </p>
 
       <p>Each platform serves a different function. Instagram builds desire. Websites build trust.
